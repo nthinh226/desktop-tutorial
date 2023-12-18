@@ -1,0 +1,28 @@
+Bước 1: Di chuyển vào nhánh chứa các commit cần gộp
+git checkout <tên_nhánh> 
+
+Bước 2: Chạy lệnh rebase với tùy chọn -i 
+git rebase -i HEAD~<số_lượng_commit>
+
+Bước 3: Sửa lịch sử commit
+Bây giờ, bạn sẽ chỉnh sửa lịch sử commit để gộp các commit lại với nhau. Chuyển các dòng “pick” sang “squash” (hoặc viết tắt là “s“) cho các commit bạn muốn gộp vào commit trước đó.
+
+Ví dụ, để gộp commit thứ hai, thứ ba và thứ tư vào commit đầu tiên, bạn sẽ sửa thành:
+
+pick a1b2c3d First commit
+squash e4f5g6h Second commit
+squash i7j8k9l Third commit
+squash m1n2o3p Fourth commit
+pick q4r5s6t Fifth commit
+
+# Rebase b123456..q4r5s6t onto b123456 (5 commits)
+#
+# Commands:
+# ...
+Sau đó lưu và đóng trình soạn thảo bằng cách nhấn phím ESC và gõ :x
+
+Bước 4: Push lên nhánh từ xa
+Cuối cùng, hãy đảm bảo rằng bạn push các thay đổi lên nhánh từ xa của mình để lưu trữ commit đã gộp:
+
+git push -f origin feature-x
+Bằng cách làm như vậy, bạn đã thành công gộp nhiều commit thành một commit duy nhất trên nhánh “feature-x“. Lịch sử commit trở nên sạch sẽ và dễ đọc hơn, tối ưu hóa quá trình phát triển phần mềm của bạn.
